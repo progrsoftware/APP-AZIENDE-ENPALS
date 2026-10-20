@@ -17,7 +17,8 @@ module.exports = {
   },
   dmg: { title: v.productName, sign: false },
   win: {
-    target: [{ target: 'nsis', arch: ['x64'] }]
+    // due installer separati: uno per Windows a 64 bit (x64) e uno per Windows a 32 bit (ia32)
+    target: [{ target: 'nsis', arch: ['x64'] }, { target: 'nsis', arch: ['ia32'] }]
   },
   nsis: {
     oneClick: false,
