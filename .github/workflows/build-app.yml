@@ -95,12 +95,17 @@ jobs:
         with:
           path: out
           merge-multiple: true
-      - name: Crea la pagina dei download
+      - name: Crea la pagina dei download (o aggiungi i file a quella già creata)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           ls -la out
-          gh release create "app-${{ github.run_number }}" out/* \
-            --repo "${{ github.repository }}" \
-            --title "App versione ${{ github.run_number }}" \
-            --notes "Installer per Windows (.exe), Mac (.dmg) e Android (.apk)."
+          TAG="app-${{ github.run_number }}"
+          if gh release view "$TAG" --repo "${{ github.repository }}" > /dev/null 2>&1; then
+            gh release upload "$TAG" out/* --clobber --repo "${{ github.repository }}"
+          else
+            gh release create "$TAG" out/* \
+              --repo "${{ github.repository }}" \
+              --title "App versione ${{ github.run_number }}" \
+              --notes "Installer per Windows (.exe), Mac (.dmg) e Android (.apk)."
+          fi
