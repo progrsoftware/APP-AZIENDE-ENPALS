@@ -1,0 +1,15 @@
+{
+  "name": "compensi-spettacolo-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Compensi spettacolo (app per Mac e Windows)",
+  "author": "Consulente",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^36.0.0",
+    "electron-builder": "^26.0.12"
+  }
+}
