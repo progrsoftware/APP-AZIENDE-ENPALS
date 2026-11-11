@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, macos-latest]
-        variant: [martinelli, autonomi]
+        variant: [martinelli, autonomi,totem]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -44,7 +44,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [martinelli, autonomi]
+        variant: [martinelli, autonomi,totem]
     runs-on: ubuntu-latest
     defaults:
       run:
