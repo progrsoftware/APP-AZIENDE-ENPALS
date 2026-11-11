@@ -1,5 +1,5 @@
 'use strict';
-// Uso: node prepare.js martinelli|autonomi
+// Uso: node prepare.js martinelli|autonomi|totem
 // Copia l'app dalla cartella del sito (MARTINELLI o AUTONOMI-SPETTACOLO) dentro "www" e prepara icona e nome.
 const fs = require('fs');
 const path = require('path');
@@ -16,6 +16,8 @@ fs.mkdirSync(www, { recursive: true });
 let html = fs.readFileSync(path.join(root, v.web, 'index.html'), 'utf8');
 // nel sito la configurazione sta nella cartella sopra; dentro l'app sta accanto alla pagina
 html = html.split('src="../sync-config.js"').join('src="sync-config.js"');
+if (v.titolo) html = html.replace(/<title>[^<]*<\/title>/, '<title>' + v.titolo + '</title>');
+if (v.cloudApp) { if (html.indexOf("clApp='azienda'") < 0) { console.error('clApp non trovato'); process.exit(1); } html = html.replace("clApp='azienda'", "clApp='" + v.cloudApp + "'"); }
 fs.writeFileSync(path.join(www, 'index.html'), html);
 
 const cfgFile = path.join(root, 'sync-config.js');

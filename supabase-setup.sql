@@ -9,7 +9,7 @@
 
 create table if not exists public.app_data (
   user_id    uuid        not null default auth.uid() references auth.users(id) on delete cascade,
-  app        text        not null check (app in ('azienda', 'lavoratore')),
+  app        text        not null check (app ~ '^[a-z0-9]{1,30}$'),
   payload    text        not null,
   rev        bigint      not null default 1,
   device     text,
